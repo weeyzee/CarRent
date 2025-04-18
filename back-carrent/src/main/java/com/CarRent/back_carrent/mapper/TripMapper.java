@@ -1,6 +1,5 @@
 package com.CarRent.back_carrent.mapper;
 
-import com.CarRent.back_carrent.dto.TripRequestDTO;
 import com.CarRent.back_carrent.dto.TripResponseDTO;
 import com.CarRent.back_carrent.model.Trip;
 import org.springframework.stereotype.Component;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class TripMapper {
 
     public TripResponseDTO toDto(Trip trip) {
-        TripResponseDTO dto = new TripResponseDTO();
+        TripResponseDTO dto = new TripResponseDTO(trip);
         dto.setTripId(trip.getTripId());
         dto.setBookingId(trip.getBooking().getBookingId());
         dto.setDistance(trip.getDistance());

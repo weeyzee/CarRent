@@ -1,0 +1,44 @@
+/* home.component.scss */
+.selected {
+    background-color: #e0f7fa;
+    border: 2px solid #00acc1;
+  }
+  .home-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.booking-card {
+  width: 100%;
+  max-width: 600px;
+  padding: 24px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+mat-list-item {
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 8px 12px;
+  transition: background-color 0.3s;
+}
+
+mat-list-item.selected {
+  background-color: #e0f2f1; /* светло-зелёный */
+  font-weight: bold;
+}
+
+mat-list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+
+button {
+  margin-top: 12px;
+  width: 100%;
+}

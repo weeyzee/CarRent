@@ -13,6 +13,7 @@ public class UserCreateDto {
     @NotBlank
     private String email;
 
+    @NotBlank
     private String phoneNumber;
 
     private String licenseNum;

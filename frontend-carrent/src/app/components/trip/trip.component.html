@@ -1,0 +1,18 @@
+<mat-card>
+    <h2>Управление поездкой</h2>
+  
+    <button mat-raised-button color="primary" (click)="startTrip()" [disabled]="trip">Начать поездку</button>
+    <button mat-raised-button color="accent" (click)="completeTrip()" [disabled]="!trip || trip.completed">Завершить поездку</button>
+  
+    <div *ngIf="trip">
+      <p><strong>Старт:</strong> {{ trip.startLocation }}</p>
+      <p><strong>Дистанция:</strong> {{ trip.distance }} км</p>
+      <p><strong>Цена:</strong> {{ trip.price }} ₽</p>
+      <p *ngIf="trip.completed">Поездка завершена</p>
+      <button *ngIf="trip.completed" (click)="goToPayment()" class="btn btn-primary">Перейти к оплате</button>
+      <p *ngIf="trip.completed"><strong>Финиш:</strong> {{ trip.endLocation }}</p>
+    </div>
+  
+    <p style="color: green">{{ message }}</p>
+  </mat-card>
+  

@@ -1,0 +1,18 @@
+<mat-card class="booking-card">
+    <mat-card-title>
+      Бронирование: #{{ booking.bookingId }}
+    </mat-card-title>
+    <mat-card-content>
+      <p><strong>Машина:</strong> {{ booking.carId }}</p>
+      <p><strong>Пользователь:</strong> {{ booking.userId }}</p>
+      <p><strong>Начало:</strong> {{ booking.startTime | date: 'short' }}</p>
+      <p><strong>Конец:</strong> {{ booking.endTime | date: 'short' }}</p>
+      <p><strong>Статус:</strong> {{ booking.status }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-mini-fab color="warn" (click)="onDelete()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  

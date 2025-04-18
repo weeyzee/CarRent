@@ -1,0 +1,13 @@
+.booking-card {
+    margin: 1rem;
+  }
+  
+  mat-card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  mat-card-content p {
+    margin: 0.2rem 0;
+  }
+  

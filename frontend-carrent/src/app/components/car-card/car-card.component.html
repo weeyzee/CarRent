@@ -1,0 +1,29 @@
+<mat-card class="car-card" matRipple [routerLink]="['/cars', car.carId]">
+    <div class="card-header">
+      <mat-card-title class="car-title">{{ car.brand }} {{ car.model }}</mat-card-title>
+      <div class="action-buttons">
+        <!-- Кнопка редактирования -->
+      <button mat-mini-fab class="edit-button" [routerLink]="['/cars', car.carId]" (click)="$event.stopPropagation()">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <!-- Кнопка удаления -->
+      <button mat-mini-fab class="delete-button" (click)="onDelete(); $event.stopPropagation();">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+      <!-- Кнопка подробностей с иконкой -->
+      <button mat-mini-fab color="accent" (click)="viewDetails(car)">
+        <mat-icon>visibility</mat-icon> <!-- Иконка просмотра -->
+      </button>
+      </div>
+    </div>
+  
+    <mat-card-content>
+      <p class="car-description">{{ car.licensePlate }}</p>
+      <div class="car-meta">
+        <p>Статус: {{ car.status }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  

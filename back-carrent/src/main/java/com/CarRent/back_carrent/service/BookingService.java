@@ -1,7 +1,6 @@
 package com.CarRent.back_carrent.service;
 
 import com.CarRent.back_carrent.dto.BookingCreateDto;
-import com.CarRent.back_carrent.mapper.BookingMapper;
 import com.CarRent.back_carrent.model.Booking;
 import com.CarRent.back_carrent.model.Car;
 import com.CarRent.back_carrent.model.User;

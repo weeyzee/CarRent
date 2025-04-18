@@ -38,10 +38,17 @@ public class TripController {
                 .orElse(ResponseEntity.badRequest().build());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<TripResponseDTO> updateTrip(@PathVariable Long id, @RequestBody TripRequestDTO dto) {
+        return tripService.updateTrip(id, dto)
+                .map(updatedTrip -> ResponseEntity.ok(updatedTrip))
+                .orElse(ResponseEntity.notFound().build());
+    }
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTrip(@PathVariable Long id) {
         return tripService.deleteTrip(id)
                 ? ResponseEntity.ok().build()
                 : ResponseEntity.notFound().build();
-    }
+    }    
 }

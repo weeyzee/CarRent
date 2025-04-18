@@ -1,0 +1,18 @@
+<mat-card class="car-detail-card">
+    <mat-card-title>Пробег машины</mat-card-title>
+    <mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="timeStamp">
+        <th mat-header-cell *matHeaderCellDef> Дата </th>
+        <td mat-cell *matCellDef="let mileage"> {{ mileage.timeStamp | date: 'dd/MM/yyyy' }} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="mileage">
+        <th mat-header-cell *matHeaderCellDef> Пробег (км) </th>
+        <td mat-cell *matCellDef="let mileage"> {{ mileage.mileage }} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </mat-table>    
+  </mat-card>
+  

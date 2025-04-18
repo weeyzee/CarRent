@@ -1,0 +1,28 @@
+
+<mat-card>
+    <mat-card-title>Сделать заказ</mat-card-title>
+    <form [formGroup]="form" (ngSubmit)="submitBooking()">
+      <mat-form-field appearance="fill">
+        <mat-label>ID пользователя</mat-label>
+        <input matInput formControlName="userId" type="number" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Начало бронирования</mat-label>
+        <input matInput formControlName="startTime" type="datetime-local" required>
+      </mat-form-field>
+  
+      <mat-card-subtitle>Выберите автомобиль:</mat-card-subtitle>
+      <mat-list>
+        <mat-list-item
+          *ngFor="let car of cars"
+          [class.selected]="car.carId === selectedCarId"
+          (click)="selectCar(car.carId)"
+        >
+          {{ car.brand }} {{ car.model }} ({{ car.licensePlate }})
+        </mat-list-item>
+      </mat-list>
+  
+      <button mat-raised-button color="primary" type="submit">Сделать заказ</button>
+    </form>
+  </mat-card>

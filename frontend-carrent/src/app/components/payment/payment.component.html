@@ -1,0 +1,20 @@
+<div *ngIf="trip">
+    <h3>Поездка №{{ trip.tripId }}</h3>
+    <p>Маршрут: {{ trip.startLocation }} - {{ trip.endLocation }}</p>
+    <p>Дистанция: {{ trip.distance }} км</p>
+    <p>Цена: {{ trip.price }} ₽</p>
+  
+    <h4>Выберите способ оплаты</h4>
+    <select [(ngModel)]="paymentMethod">
+      <option value="cash">Наличные</option>
+      <option value="credit_card">Кредитная карта</option>
+      <option value="paypal">PayPal</option>
+    </select>
+  
+    <div>
+      <p><strong>Дата оплаты:</strong> {{ currentDate | date:'dd.MM.yyyy HH:mm' }}</p>
+    </div>
+  
+    <button (click)="completePayment()" class="btn btn-success">Завершить оплату</button>
+  </div>
+  
