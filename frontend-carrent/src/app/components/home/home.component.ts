@@ -44,10 +44,18 @@ export class HomeComponent implements OnInit {
       userId: [''],
       startTime: ['']
     });
-
+    
     this.carService.getCars().subscribe(cars => {
       this.cars = cars;
+      console.log('Загруженные машины:', cars); // ✅ Должно что-то выводить
     });
+  }
+
+  onImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    console.log('Ошибка загрузки:', img.src);
+    console.log('Пробую загрузить:', './assets/cars/default.jpg');
+    img.src = './assets/cars/default.jpg';
   }
 
   selectCar(carId: number) {

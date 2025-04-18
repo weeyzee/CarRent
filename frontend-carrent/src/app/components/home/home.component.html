@@ -1,28 +1,57 @@
+<div class="payment-background">
+  <img src="./assets/promo/background.png" alt="Фон проката авто" class="background-image">
+<div class="booking-wrapper">
+  <!-- <svg class="bottom-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120">
+    <path fill="#5e0090" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,106.7C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+  </svg> -->
+  <div class="home-container">
+    <mat-card class="booking-card">
+      <mat-card-title>Сделать заказ</mat-card-title>
+      <form [formGroup]="form" (ngSubmit)="submitBooking()">
+        <div class="form-row">
+          <mat-form-field appearance="fill" class="compact-field">
+            <mat-label>ID пользователя*</mat-label>
+            <input matInput formControlName="userId" type="number" required />
+          </mat-form-field>
 
-<mat-card>
-    <mat-card-title>Сделать заказ</mat-card-title>
-    <form [formGroup]="form" (ngSubmit)="submitBooking()">
-      <mat-form-field appearance="fill">
-        <mat-label>ID пользователя</mat-label>
-        <input matInput formControlName="userId" type="number" required>
-      </mat-form-field>
+          <mat-form-field appearance="fill" class="compact-field">
+            <mat-label>Начало бронирования*</mat-label>
+            <input matInput formControlName="startTime" type="datetime-local" required />
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" class="submit-button">
+          Подтвердить
+        </button>
+      </form>
+    </mat-card>
+  </div>
+</div>
+
+<div class="car-section">
   
-      <mat-form-field appearance="fill">
-        <mat-label>Начало бронирования</mat-label>
-        <input matInput formControlName="startTime" type="datetime-local" required>
-      </mat-form-field>
-  
-      <mat-card-subtitle>Выберите автомобиль:</mat-card-subtitle>
-      <mat-list>
-        <mat-list-item
-          *ngFor="let car of cars"
-          [class.selected]="car.carId === selectedCarId"
-          (click)="selectCar(car.carId)"
-        >
-          {{ car.brand }} {{ car.model }} ({{ car.licensePlate }})
-        </mat-list-item>
-      </mat-list>
-  
-      <button mat-raised-button color="primary" type="submit">Сделать заказ</button>
-    </form>
-  </mat-card>
+  <!-- <h2 style="text-align: center; margin-bottom: 16px;">Выберите автомобиль</h2> -->
+  <div class="car-grid">
+    
+    <mat-card
+      class="car-card"
+      *ngFor="let car of cars"
+      [class.selected]="car.carId === selectedCarId"
+      (click)="selectCar(car.carId)"
+    >
+      <img
+        mat-card-image
+        [src]="'./assets/cars/' + (car.brand + car.model).replaceAll(' ', '') + '.png'"
+        (error)="onImageError($event)"
+      />
+      <mat-card-content>
+        <h3>{{ car.brand }} {{ car.model }}</h3>
+        <!-- <p>{{ car.licensePlate }}</p> -->
+      </mat-card-content>
+    </mat-card>
+    
+  </div>
+</div>
+</div>
+
+

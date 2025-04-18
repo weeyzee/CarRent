@@ -1,0 +1,142 @@
+/* Стили для карточки поездки */
+.trip-card {
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+    background: linear-gradient(to bottom, #ffffff, #f5f5f5);
+  }
+  
+  .trip-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    
+    h2 {
+      margin: 0;
+      color: #1976d2;
+      font-weight: 500;
+    }
+  }
+  
+  .trip-icon {
+    color: #1976d2;
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .trip-info {
+    margin: 20px 0;
+    padding: 16px;
+    background: rgba(25, 118, 210, 0.05);
+    border-radius: 8px;
+  }
+  
+  .info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    
+    mat-icon {
+      color: #1976d2;
+      margin-right: 12px;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  .info-label {
+    font-weight: 500;
+    color: #555;
+    margin-right: 8px;
+  }
+  
+  .info-value {
+    color: #333;
+  }
+  
+  .highlight {
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  
+  .trip-completed {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed #ccc;
+    text-align: center;
+    
+    .completed-icon {
+      color: #4caf50;
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 8px;
+    }
+    
+    p {
+      color: #4caf50;
+      font-weight: 500;
+      margin: 8px 0 16px;
+    }
+  }
+  
+  .trip-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  
+  .action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    font-weight: 500;
+    
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  .payment-button {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .status-message {
+    margin-top: 16px;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+    color: #4caf50;
+    background-color: rgba(76, 175, 80, 0.1);
+  }
+  .payment-background {
+    position: relative;
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    align-items: top;
+    justify-content: center;
+  }
+  
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.7; /* Прозрачность фона */
+  }

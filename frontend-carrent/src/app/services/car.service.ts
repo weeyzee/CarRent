@@ -24,6 +24,14 @@ export class CarService {
     return this.http.post<Car>(this.apiUrl, car);
   }
 
+  getAvailableCarByBrand(brand: string): Observable<Car> {
+    return this.http.get<Car>(`${this.apiUrl}/cars/available?brand=${brand}`);
+  }
+
+  getAvailableBrands(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/brands`);
+  }
+
   updateCar(carId: number, car: Car): Observable<Car> {
     return this.http.put<Car>(`${this.apiUrl}/${carId}`, car);
   }

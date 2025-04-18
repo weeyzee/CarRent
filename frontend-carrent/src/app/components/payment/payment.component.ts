@@ -5,14 +5,22 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';  
 import { PaymentService } from '../../services/payment.service';
 import { Payment } from '../../dto/payment.model'; // Импортируем Payment
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  selector: 'app-payment',
+  selector: 'app-payment',                                                                                                                                                     
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css'],
   imports: [
     FormsModule,
-    CommonModule  
+    CommonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatRadioModule,
+    MatCardModule
   ]
 })
 export class PaymentComponent implements OnInit {
@@ -21,10 +29,10 @@ export class PaymentComponent implements OnInit {
   paymentMethod: string = 'cash';
   currentDate: Date = new Date();
 
-  constructor(
+  constructor(                                   
     private route: ActivatedRoute,
     private tripService: TripService,
-    private paymentService: PaymentService,
+    private paymentService: PaymentService,                                     
     private router: Router
   ) {}
 

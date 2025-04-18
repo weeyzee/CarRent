@@ -1,20 +1,73 @@
-<div *ngIf="trip">
-    <h3>Поездка №{{ trip.tripId }}</h3>
-    <p>Маршрут: {{ trip.startLocation }} - {{ trip.endLocation }}</p>
-    <p>Дистанция: {{ trip.distance }} км</p>
-    <p>Цена: {{ trip.price }} ₽</p>
-  
-    <h4>Выберите способ оплаты</h4>
-    <select [(ngModel)]="paymentMethod">
-      <option value="cash">Наличные</option>
-      <option value="credit_card">Кредитная карта</option>
-      <option value="paypal">PayPal</option>
-    </select>
-  
-    <div>
-      <p><strong>Дата оплаты:</strong> {{ currentDate | date:'dd.MM.yyyy HH:mm' }}</p>
+<div class="payment-background">
+  <img src="./assets/promo/background.png" alt="Фон проката авто" class="background-image">
+  <mat-card class="payment-card">
+    <div class="payment-header">
+      <h2>Поездка №{{ trip.tripId }}</h2>
+      <mat-icon class="payment-icon">receipt</mat-icon>
     </div>
-  
-    <button (click)="completePayment()" class="btn btn-success">Завершить оплату</button>
-  </div>
-  
+
+    <div class="payment-content">
+      <div class="route-info">
+        <mat-icon class="route-icon">place</mat-icon>
+        <div>
+          <p class="route-point">{{ trip.startLocation }}</p>
+          <div class="route-line"></div>
+          <p class="route-point">{{ trip.endLocation }}</p>
+        </div>
+      </div>
+
+      <div class="trip-details">
+        <div class="detail-item">
+          <mat-icon>straighten</mat-icon>
+          <span>Дистанция: <strong>{{ trip.distance }} км</strong></span>
+        </div>
+        
+        <div class="detail-item highlight">
+          <mat-icon>attach_money</mat-icon>
+          <span>Цена: <strong>{{ trip.price }} ₽</strong></span>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <h3 class="payment-title">Выберите способ оплаты</h3>
+      
+      <mat-radio-group class="payment-methods" [(ngModel)]="paymentMethod">
+        <mat-radio-button value="cash" checked>
+          <div class="method-option">
+            <mat-icon>money</mat-icon>
+            <span>Наличные</span>
+            <mat-icon class="check-icon">check_circle</mat-icon>
+          </div>
+        </mat-radio-button>
+        
+        <mat-radio-button value="credit_card">
+          <div class="method-option">
+            <mat-icon>credit_card</mat-icon>
+            <span>Кредитная карта</span>
+          </div>
+        </mat-radio-button>
+        
+        <mat-radio-button value="paypal">
+          <div class="method-option">
+            <mat-icon>account_balance_wallet</mat-icon>
+            <span>PayPal</span>
+          </div>
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <div class="payment-date">
+        <mat-icon>event</mat-icon>
+        <span>Дата оплаты: {{ currentDate | date:'dd.MM.yyyy HH:mm' }}</span>
+      </div>
+    </div>
+
+    <button mat-raised-button 
+            color="primary" 
+            class="complete-button"
+            (click)="completePayment()">
+      <mat-icon>check_circle</mat-icon>
+      Завершить оплату
+    </button>
+  </mat-card>
+</div>
