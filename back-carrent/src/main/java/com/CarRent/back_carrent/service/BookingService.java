@@ -7,6 +7,9 @@ import com.CarRent.back_carrent.model.User;
 import com.CarRent.back_carrent.repository.BookingRepository;
 import com.CarRent.back_carrent.repository.CarRepository;
 import com.CarRent.back_carrent.repository.UserRepository;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,24 +35,38 @@ public class BookingService {
     public Optional<Booking> getBookingById(Long id) {
         return bookingRepository.findById(id);
     }
-
+    
+    @Transactional
     public Optional<Booking> createBooking(BookingCreateDto dto) {
         Optional<Car> carOpt = carRepository.findById(dto.getCarId());
         Optional<User> userOpt = userRepository.findById(dto.getUserId());
-
+    
         if (carOpt.isEmpty() || userOpt.isEmpty()) {
             return Optional.empty();
         }
-
+    
+        Car car = carOpt.get();
+        User user = userOpt.get();
+    
+        // ✅ Проверим, доступна ли машина
+        if (!"Available".equalsIgnoreCase(car.getStatus())) {
+            return Optional.empty(); // или выбросить исключение
+        }
+    
+        // ✅ Меняем статус машины
+        car.setStatus("Occupied");
+        carRepository.save(car);
+    
         Booking booking = new Booking();
-        booking.setCar(carOpt.get());
-        booking.setUser(userOpt.get());
+        booking.setCar(car);
+        booking.setUser(user);
         booking.setStartTime(dto.getStartTime());
         booking.setEndTime(dto.getEndTime());
         booking.setStatus(dto.getStatus());
-
+    
         return Optional.of(bookingRepository.save(booking));
     }
+    
 
     public Optional<Booking> updateBooking(Long id, BookingCreateDto dto) {
         return bookingRepository.findById(id).flatMap(existing -> {

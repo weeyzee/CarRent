@@ -4,6 +4,7 @@ import com.CarRent.back_carrent.dto.PaymentRequestDTO;
 import com.CarRent.back_carrent.dto.PaymentResponseDTO;
 import com.CarRent.back_carrent.service.PaymentService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class PaymentController {
     }
 
     @PostMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<PaymentResponseDTO> createPayment(@RequestBody PaymentRequestDTO dto) {
         return paymentService.createPayment(dto)
                 .map(saved -> ResponseEntity.status(201).body(saved))

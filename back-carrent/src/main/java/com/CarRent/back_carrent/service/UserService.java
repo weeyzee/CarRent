@@ -26,6 +26,12 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+    
+    
+
     public User createUser(User user) {
         return userRepository.save(user);
     }
@@ -36,8 +42,6 @@ public class UserService {
             return userRepository.save(user);
         });
     }
-
-
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }

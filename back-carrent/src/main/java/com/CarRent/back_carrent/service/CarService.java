@@ -26,6 +26,10 @@ public class CarService {
         return carRepository.findById(id);
     }
 
+    public Optional<Car> findFirstAvailableByBrand(String brand) {
+        return carRepository.findFirstByBrandAndStatus(brand, "Available");
+    }
+    
     public Car createCar(Car car) {
         return carRepository.save(car);
     }

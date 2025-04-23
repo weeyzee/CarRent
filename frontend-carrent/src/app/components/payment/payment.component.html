@@ -1,8 +1,8 @@
 <div class="payment-background">
   <img src="./assets/promo/background.png" alt="Фон проката авто" class="background-image">
-  <mat-card class="payment-card">
+  <mat-card *ngIf="trip" class="payment-card">
     <div class="payment-header">
-      <h2>Поездка №{{ trip.tripId }}</h2>
+      <h2>Поездка №{{ trip?.tripId }}</h2>
       <mat-icon class="payment-icon">receipt</mat-icon>
     </div>
 

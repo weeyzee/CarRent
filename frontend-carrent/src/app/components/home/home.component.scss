@@ -1,3 +1,79 @@
+/* Стили для секции автомобилей */
+.full-width-car-section {
+  width: 100%;
+  padding: 30px 10px;
+  // background: rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 1;
+}
+
+.car-grid-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 0px;
+}
+
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.car-card {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  img {
+    height: 10px; // Уменьшаем высоту изображения
+    width: auto; // Автоматическая ширина для сохранения пропорций
+    max-width: 40%; // Максимальная ширина 80% от карточки
+    margin: 0 auto; // Центрирование изображения
+    display: block; // Для корректного центрирования
+    object-fit: contain; // Сохраняем пропорции
+    padding: 10px 0; // Отступы сверху и снизу
+  }
+  
+  
+  mat-card-content {
+    padding: 16px;
+    flex-grow: 1;
+    
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+  }
+}
+
+.car-card.selected {
+  border: 2px solid #1976d2;
+  box-shadow: 0 0 15px rgba(25, 118, 210, 0.4);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .car-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  
+  .car-card img {
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .car-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .booking-wrapper {
   position: relative;
   padding-bottom: 0px; /* Место для волны */
@@ -53,7 +129,7 @@
 }
 
 .car-card img {
-  height: 100px; // или сколько тебе нужно
+  height: 150px; // или сколько тебе нужно
   width: 100%;
   object-fit: cover;
   border-radius: 4px 4px 0 0; // скругления, если нужно
@@ -92,13 +168,6 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 16px;
-  margin-top: 16px;
-}
-
-.car-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
 }
 
 .car-card:hover {
@@ -107,7 +176,7 @@ button {
 
 .car-section {
   width: 100%;
-  padding: 0 20px 40px;
+  padding: 0 10px 40px;
 }
 
 .car-card.selected {
@@ -133,4 +202,104 @@ button {
   object-fit: cover;
   z-index: 0;
   opacity: 0.7; /* Прозрачность фона */
+}
+/* styles.scss или компонентный SCSS */
+.auth-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.auth-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  // background: 
+  //   linear-gradient(135deg, rgba(94, 0, 144, 0.9) 0%, rgba(195, 169, 214, 0.9) 100%),
+  //   url('/assets/images/car-bg.jpg') center/cover no-repeat;
+  z-index: 0;
+}
+
+.auth-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 800px;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  // background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(5px);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  
+  h1 {
+    color: #5e0090;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    color: #666;
+    margin: 0;
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.form-field {
+  width: 100%;
+  
+  .mat-form-field-outline {
+    // background-color: white;
+    border-radius: 8px;
+  }
+  
+  .mat-icon {
+    color: #5e0090;
+  }
+}
+
+.submit-button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  margin-top: 1rem;
+  
+  .mat-icon {
+    margin-right: 8px;
+  }
+}
+
+/* Анимации */
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #5e0090;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #5e0090;
 }

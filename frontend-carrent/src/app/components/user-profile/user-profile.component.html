@@ -1,1 +1,31 @@
-<p>user-profile works!</p>
+<mat-card *ngIf="userProfile">
+    <mat-card-title>{{ userProfile.name }}</mat-card-title>
+    <mat-card-content>
+      <p>Email: {{ userProfile.email }}</p>
+      <p>Телефон: {{ userProfile.phoneNumber }}</p>
+      <p>Лицензия: {{ userProfile.licenseNum }}</p>
+      <p>Дата регистрации: {{ userProfile.registrationDate | date:'short' }}</p>
+    </mat-card-content>
+  </mat-card>
+  
+  <h2 style="margin-top: 20px;">История поездок</h2>
+  <div *ngIf="trips.length > 0; else noTrips">
+    <mat-card *ngFor="let trip of trips" style="margin-bottom: 10px;">
+      <mat-card-title>Поездка #{{ trip.tripId }}</mat-card-title>
+      <mat-card-content>
+        <p><strong>Марка машины:</strong> {{ trip.booking.car.brand }} {{ trip.booking.car.model }}</p>
+        <p><strong>Номер:</strong> {{ trip.booking.car.licensePlate }}</p>
+        <p><strong>Время бронирования:</strong> с {{ trip.booking.startTime | date:'short' }} до {{ trip.booking.endTime | date:'short' }}</p>
+        <p><strong>Откуда:</strong> {{ trip.startLocation }}</p>
+        <p><strong>Куда:</strong> {{ trip.endLocation }}</p>
+        <p><strong>Дистанция:</strong> {{ trip.distance }} км</p>
+        <p><strong>Цена:</strong> {{ trip.price }} ₽</p>
+        <p><strong>Завершена:</strong> {{ trip.completed ? 'Да' : 'Нет' }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <ng-template #noTrips>
+    <p>Поездок пока нет.</p>
+  </ng-template>
+  

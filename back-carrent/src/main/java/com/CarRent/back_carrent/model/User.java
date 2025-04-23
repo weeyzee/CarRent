@@ -34,4 +34,6 @@ public class User {
     private String password;
 
     private Timestamp registrationDate = new Timestamp(System.currentTimeMillis());
+
+
 }

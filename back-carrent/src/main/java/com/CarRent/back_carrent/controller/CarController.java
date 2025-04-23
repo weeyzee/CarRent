@@ -7,6 +7,7 @@ import com.CarRent.back_carrent.dto.CarCreateDto;
 import com.CarRent.back_carrent.mapper.CarMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -28,7 +29,15 @@ public class CarController {
                 .toList();
     }
 
+    @GetMapping("/available")
+    public ResponseEntity<CarDto> getAvailableCarByBrandQuery(@RequestParam String brand) {
+        return carService.findFirstAvailableByBrand(brand)
+                .map(CarMapper::toDto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
+    
     @GetMapping("/{id}")
     public ResponseEntity<CarDto> getCarById(@PathVariable Long id) {
         return carService.getCarById(id)

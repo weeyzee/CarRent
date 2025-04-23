@@ -25,7 +25,7 @@ export class CarService {
   }
 
   getAvailableCarByBrand(brand: string): Observable<Car> {
-    return this.http.get<Car>(`${this.apiUrl}/cars/available?brand=${brand}`);
+    return this.http.get<Car>(`${this.apiUrl}/available?brand=${brand}`);
   }
 
   getAvailableBrands(): Observable<string[]> {

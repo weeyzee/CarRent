@@ -4,8 +4,10 @@ import com.CarRent.back_carrent.dto.TripRequestDTO;
 import com.CarRent.back_carrent.dto.TripResponseDTO;
 import com.CarRent.back_carrent.mapper.TripMapper;
 import com.CarRent.back_carrent.model.Booking;
+import com.CarRent.back_carrent.model.Car;
 import com.CarRent.back_carrent.model.Trip;
 import com.CarRent.back_carrent.repository.BookingRepository;
+import com.CarRent.back_carrent.repository.CarRepository;
 import com.CarRent.back_carrent.repository.TripRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,10 @@ public class TripService {
     private final TripRepository tripRepository;
     private final BookingRepository bookingRepository;
     private final TripMapper tripMapper;
+    private final CarRepository carRepository;
 
-    public TripService(TripRepository tripRepository, BookingRepository bookingRepository, TripMapper tripMapper) {
+    public TripService(TripRepository tripRepository, BookingRepository bookingRepository, TripMapper tripMapper, CarRepository carRepository) {
+        this.carRepository = carRepository;
         this.tripRepository = tripRepository;
         this.bookingRepository = bookingRepository;
         this.tripMapper = tripMapper;
@@ -29,6 +33,10 @@ public class TripService {
         return tripRepository.findAll().stream().map(tripMapper::toDto).toList();
     }
 
+    public List<Trip> getTripsByUserId(Long userId) {
+        return tripRepository.findAllByUserId(userId);
+    }
+    
     public Optional<TripResponseDTO> getTripById(Long id) {
         return tripRepository.findById(id).map(tripMapper::toDto);
     }
@@ -50,11 +58,11 @@ public class TripService {
 
     public Optional<TripResponseDTO> updateTrip(Long id, TripRequestDTO dto) {
         Optional<Trip> tripOptional = tripRepository.findById(id);
-        
+
         if (tripOptional.isPresent()) {
             Trip trip = tripOptional.get();
-            
-            // Обновляем только те поля, которые пришли с запросом
+
+            // Обновляем поля
             if (dto.getStartLocation() != null) {
                 trip.setStartLocation(dto.getStartLocation());
             }
@@ -67,22 +75,30 @@ public class TripService {
             if (dto.getPrice() != null) {
                 trip.setPrice(dto.getPrice());
             }
-    
-            // По умолчанию, если не было указано, предполагаем, что поездка не завершена
+
+            // Логика завершения поездки и освобождения машины
             if (dto.getCompleted() != null) {
                 trip.setCompleted(dto.getCompleted());
+
+                if (dto.getCompleted()) {
+                    // ✅ Освобождаем машину
+                    Car car = trip.getBooking().getCar();
+                    car.setStatus("Available");
+                    // 💡 Обновим машину в базе
+                    // bookingRepository.save(trip.getBooking()); // только если Booking обновляется
+                    // ⬇️ Лучше будет внедрить carRepository:
+                    carRepository.save(car);
+                }
             } else {
-                trip.setCompleted(false); // Если значение не передано, оставляем false
+                trip.setCompleted(false);
             }
-    
-            // Сохраняем обновленные данные в базе
+
             tripRepository.save(trip);
             return Optional.of(new TripResponseDTO(trip));
         }
-    
+
         return Optional.empty();
     }
-    
     
     public boolean deleteTrip(Long id) {
         if (tripRepository.existsById(id)) {

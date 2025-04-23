@@ -6,4 +6,6 @@ import com.CarRent.back_carrent.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
+
+    Optional<User> findByEmailOrPhoneNumber(String email, String phoneNumber);
 }

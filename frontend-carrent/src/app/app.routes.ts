@@ -9,25 +9,20 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { HomeComponent } from './components/home/home.component'; 
 
 export const routes: Routes = [
-  // Список автомобилей
+  
   { path: 'cars', component: CarListComponent },
 
-  // Детали автомобиля по идентификатору carId
   { path: 'cars/:carId', component: CarDetailComponent },
 
-  // Создание бронирования
   { path: 'booking', component: BookingComponent },
 
-  // Путешествия (поездки)
   { path: 'trips', component: TripComponent },
 
   { path: 'trip-form/:bookingId', component: TripComponent },
 
-  // Профиль пользователя
-  { path: 'profile', component: UserProfileComponent },
-
-  // Оплата
   { path: 'payment/:tripId', component: PaymentComponent },
+
+  { path: 'user-profile', component: UserProfileComponent },
 
   // Домашняя страница
   { path: '', component: HomeComponent, pathMatch: 'full' },

@@ -2,6 +2,7 @@ package com.CarRent.back_carrent.controller;
 
 import com.CarRent.back_carrent.dto.TripRequestDTO;
 import com.CarRent.back_carrent.dto.TripResponseDTO;
+import com.CarRent.back_carrent.model.Trip;
 import com.CarRent.back_carrent.service.TripService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,11 @@ public class TripController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Trip>> getTripsByUser(@PathVariable Long userId) {
+        return ResponseEntity.ok(tripService.getTripsByUserId(userId));
+    }
+    
     @PostMapping
     public ResponseEntity<TripResponseDTO> createTrip(@RequestBody TripRequestDTO dto) {
         return tripService.createTrip(dto)
