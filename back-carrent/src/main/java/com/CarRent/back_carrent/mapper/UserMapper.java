@@ -14,6 +14,7 @@ public class UserMapper {
         dto.setPhoneNumber(user.getPhoneNumber());
         dto.setLicenseNum(user.getLicenseNum());
         dto.setRegistrationDate(user.getRegistrationDate());
+        dto.setRole(user.getRole());
         return dto;
     }
 
@@ -24,6 +25,7 @@ public class UserMapper {
         user.setPhoneNumber(dto.getPhoneNumber());
         user.setLicenseNum(dto.getLicenseNum());
         user.setPassword(dto.getPassword());
+        user.setRole("USER");
         return user;
     }
 
@@ -32,6 +34,5 @@ public class UserMapper {
         user.setEmail(dto.getEmail());
         user.setPhoneNumber(dto.getPhoneNumber());
         user.setLicenseNum(dto.getLicenseNum());
-        user.setPassword(dto.getPassword());
     }
 }

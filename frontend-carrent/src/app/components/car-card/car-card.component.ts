@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { Car } from '../../dto/car.model';
 import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { CarService } from '../../services/car.service';
 
 @Component({
   selector: 'app-car-card',
@@ -23,15 +24,26 @@ export class CarCardComponent {
   @Input() car!: Car;
   @Output() deleteCar = new EventEmitter<number>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private carService: CarService) {}
 
   viewDetails(car: Car) {
     this.router.navigate(['/cars', car.carId]);
   }
 
-  onDelete() {
-    if (this.car.carId) {
-      this.deleteCar.emit(this.car.carId);
+  // onDelete() {
+  //   if (this.car.carId) {
+  //     this.deleteCar.emit(this.car.carId);
+  //   }
+  // }
+
+  delCar(carId: number): void {
+    if (confirm('Вы уверены, что хотите удалить машину? C ID: ' + carId)) {
+      this.carService.deleteCar(carId).subscribe({
+        next: () => {
+          console.log('Машин удалён!""!');
+        },
+        error: err => console.error('Ошибка удаления пользователя:', err)
+      });
     }
   }
 }

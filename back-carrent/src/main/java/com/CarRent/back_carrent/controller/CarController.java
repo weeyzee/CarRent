@@ -7,13 +7,11 @@ import com.CarRent.back_carrent.dto.CarCreateDto;
 import com.CarRent.back_carrent.mapper.CarMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/cars")
-@CrossOrigin(origins = "http://localhost:4200")
 public class CarController {
 
     private final CarService carService;
@@ -36,7 +34,6 @@ public class CarController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
     
     @GetMapping("/{id}")
     public ResponseEntity<CarDto> getCarById(@PathVariable Long id) {

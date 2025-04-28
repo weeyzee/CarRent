@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
 
     @Autowired
@@ -29,8 +28,8 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword())); // Хэшируем пароль
-        userService.createUser(user); // Используем существующий метод
+        user.setPassword(passwordEncoder.encode(user.getPassword())); 
+        userService.createUser(user); 
         return ResponseEntity.ok(Map.of("message", "Пользователь зарегистрирован"));
     }
 

@@ -46,10 +46,22 @@ export class HomeComponent implements OnInit {
   cars: Car[] = [];
   selectedCarId: number | null = null;
   isLoggedIn = false;
+  get FlagRole(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+    
+    try {
+        const decodedToken: any = jwtDecode(token);
+        return decodedToken.role === 'ADMIN';
+    } catch {
+        console.error('ошибк декордирования токена');
+        return false;
+    }
+}
   authForm!: FormGroup;
   hide = true;
   showLoginForm = false;
-  minDate = new Date(Date.now() + 24 * 60 * 60 * 1000); // Завтра
+  minDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
   constructor(
     private router: Router,
@@ -70,14 +82,14 @@ export class HomeComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern(/^\+7\d{10}$/) // формат +7XXXXXXXXXX
+          Validators.pattern(/^\+7\d{10}$/) 
         ]
       ],
       licenseNum: [
         '',
         [
           Validators.required,
-          Validators.pattern(/^\d{10}$/) // строго 10 цифр
+          Validators.pattern(/^\d{10}$/) 
         ]
       ]
     });
@@ -91,21 +103,6 @@ export class HomeComponent implements OnInit {
       { carId: 2, brand: 'Audi', model: 'RS6', licensePlate: '', status: 'Available' },
       { carId: 3, brand: 'Audi', model: 'RS7', licensePlate: '', status: 'Available' }
     ];
-    // this.carService.getCars().subscribe(cars => {
-    //   this.cars = cars;
-    // });
-
-    // this.carService.getAvailableCarByBrand('Toyota').subscribe({
-    //   next: (car) => {
-    //     console.log('Найдена машина:', car);
-    //   },
-    //   error: (err) => {
-    //     console.error('Ошибка при поиске машины:', err);
-    //     alert('Нет доступных машин');
-    //   }
-    // });
-
-    // Проверяем, авторизован ли пользователь
     this.isLoggedIn = !!localStorage.getItem('token');
   }
 
@@ -118,6 +115,8 @@ export class HomeComponent implements OnInit {
           this.isLoggedIn = true;
           this.cdRef.detectChanges();
           console.log('✅ Успешный вход!');
+          // this.setRoleFromToken();
+          
         } else {
           console.log('❌ Токен не получен!');
         }
@@ -138,7 +137,7 @@ export class HomeComponent implements OnInit {
         this.userService.loginUser(email, password).subscribe({
           next: (response) => {
             if (response.token) {
-              localStorage.setItem('token', response.token); // Сохраняем токен
+              localStorage.setItem('token', response.token); // сохранио токен
               this.isLoggedIn = true;
               this.cdRef.detectChanges();
               console.log('✅ Успешный вход!');
@@ -159,7 +158,7 @@ export class HomeComponent implements OnInit {
   
   togglePasswordVisibility(input: HTMLInputElement) {
     this.hide = !this.hide;
-    setTimeout(() => input.focus(), 0); // Сохраняем фокус
+    setTimeout(() => input.focus(), 0); // про фокус
   }
 
   onImageError(event: Event) {
@@ -179,7 +178,7 @@ export class HomeComponent implements OnInit {
     console.log('Ищу машину бренда:', selectedCar.brand);
     this.carService.getAvailableCarByBrand(selectedCar.brand).subscribe({
       next: (car) => {
-        const userId = this.getUserIdFromToken(); // Получаем userId из токена
+        const userId = this.getUserIdFromToken(); 
         if (!userId) {
           console.log('❌ Ошибка: пользователь не авторизован!');
           return;
@@ -195,7 +194,7 @@ export class HomeComponent implements OnInit {
         this.bookingService.createBooking(bookingData).subscribe({
           next: async (res) => {
             console.log('✅ Бронирование создано!');
-            await this.dialogService.alert('Бронирование успешно создано!');
+            await this.dialogService.alert('Бронирование успешно создано! Машину доставят к вам в течение 15 минут!');
             this.router.navigate(['/trip-form', res.bookingId]);
           },
           error: (err) => console.error('❌ Ошибка бронирования:', err)
@@ -215,17 +214,23 @@ export class HomeComponent implements OnInit {
   
     try {
       const decodedToken: any = jwtDecode(token);
-      console.log('decodedToken.userId:', decodedToken.userId); // Логируем userId
-      return decodedToken.userId || null; // Извлекаем userId
+      console.log('decodedToken.userId:', decodedToken.userId); 
+      return decodedToken.userId || null; 
       
     } catch (error) {
-      console.error('Ошибка декодирования токена:', error);
+      console.error('oшибка декодирования токена:', error);
       return null;
     }
   }
+
   goToProfile() {
     this.router.navigate(['/user-profile']);
   }
+
+  goToAdmin() {
+    this.router.navigate(['/admin']);
+  }
+
   logout(): void {
     localStorage.removeItem('token'); // Удаляем токен
     this.isLoggedIn = false;

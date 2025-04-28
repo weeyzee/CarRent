@@ -119,16 +119,10 @@
             </mat-form-field>
           </div>
 
-          <!-- <div class="form-row">
-            <mat-form-field appearance="fill" class="compact-field">
-              <mat-label>Начало бронирования*</mat-label>
-              <input matInput formControlName="startTime" type="datetime-local" required />
-            </mat-form-field>
-          </div> -->
-
           <button mat-raised-button color="primary" type="submit" class="submit-button">
             Подтвердить
           </button>
+          <button *ngIf="FlagRole" mat-raised-button color="warn" class="submit-button" (click)="goToAdmin()">Админ панель</button>
           <button mat-raised-button color="warn" class="submit-button" (click)="goToProfile()">Личный кабинет</button>
           <button mat-raised-button color="warn" class="submit-button" (click)="logout()">Выйти</button>
         </form>

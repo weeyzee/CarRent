@@ -4,6 +4,15 @@ import { environment } from '../../environments';
 import { Observable } from 'rxjs';
 import { User } from '../dto/user.model';  // предполагается, что у вас есть модель User
 
+export interface UserDto {
+  userId: number;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  licenseNum: string;
+  registrationDate: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +20,10 @@ export class UserService {
   private apiUrl = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient) { }
+
+  getAllUsers(): Observable<UserDto[]> {
+    return this.http.get<UserDto[]>(`${this.apiUrl}/users`);
+  }
 
   getUserById(userId: number): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/users/${userId}`);
@@ -32,8 +45,12 @@ export class UserService {
     return this.http.post<{ message: string }>(`${this.apiUrl}/auth/register`, user);
   }
 
-  updateUser(userId: number, user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/users/${userId}`, user);
+  // updateUser(userId: number, user: User): Observable<User> {
+  //   return this.http.put<User>(`${this.apiUrl}/users/${userId}`, user);
+  // }
+
+  updateUser(userId: number, user: Partial<UserDto>): Observable<UserDto> {
+    return this.http.put<UserDto>(`${this.apiUrl}/users/${userId}`, user);
   }
 
   deleteUser(userId: number): Observable<void> {

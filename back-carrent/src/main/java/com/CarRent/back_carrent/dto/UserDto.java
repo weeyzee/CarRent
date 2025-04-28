@@ -11,4 +11,5 @@ public class UserDto {
     private String phoneNumber;
     private String licenseNum;
     private Timestamp  registrationDate;
+    private String role;
 }

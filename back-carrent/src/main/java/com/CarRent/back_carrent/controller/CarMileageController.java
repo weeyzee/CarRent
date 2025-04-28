@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/mileage")
-@CrossOrigin(origins = "http://localhost:4200")
 public class CarMileageController {
 
     private final CarMileageService carMileageService;

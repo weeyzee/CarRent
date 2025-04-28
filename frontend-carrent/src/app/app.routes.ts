@@ -7,6 +7,8 @@ import { TripComponent } from './components/trip/trip.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { HomeComponent } from './components/home/home.component'; 
+import { AdminUserManagementComponent } from './components/admin-user-management/admin-user-management.component';
+import { CarCardComponent } from './components/car-card/car-card.component';
 
 export const routes: Routes = [
   
@@ -24,8 +26,9 @@ export const routes: Routes = [
 
   { path: 'user-profile', component: UserProfileComponent },
 
-  // Домашняя страница
+  { path: 'admin', component: AdminUserManagementComponent },
+
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  // С неизвестных редирект на домашнюю страницу
+
   { path: '**', redirectTo: '' }
 ];

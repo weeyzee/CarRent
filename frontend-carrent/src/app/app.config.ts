@@ -14,14 +14,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
 
-    // Подключение Material модулей
     importProvidersFrom(
       BrowserAnimationsModule,
       MatFormFieldModule,
       MatInputModule,
     ),
 
-    // Локализация на русский
     { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' }
   ]
 };

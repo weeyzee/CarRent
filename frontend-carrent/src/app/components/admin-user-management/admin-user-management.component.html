@@ -1,0 +1,21 @@
+<button mat-button color="primary" (click)="goToCars()">Автопарк</button>
+
+<div *ngFor="let user of users" class="user-card" [ngClass]="{ 'editing': editUser?.userId === user.userId }">
+  <mat-card *ngIf="!editUser || editUser.userId !== user.userId">
+    <h3>{{ user.name }}</h3>
+    <p>Email: {{ user.email }}</p>
+    <p>Телефон: {{ user.phoneNumber }}</p>
+    <p>Вод. удостоверение: {{ user.licenseNum }}</p>
+    <button mat-button color="primary" (click)="startEdit(user)">Редактировать</button>
+    <button mat-button color="warn" (click)="deleteUser(user.userId)">Удалить</button>
+  </mat-card>
+</div>
+
+<mat-card *ngIf="editUser" class="edit-card">
+  <input matInput [(ngModel)]="editUser.name" placeholder="Имя">
+  <input matInput [(ngModel)]="editUser.email" placeholder="Email">
+  <input matInput [(ngModel)]="editUser.phoneNumber" placeholder="Телефон">
+  <input matInput [(ngModel)]="editUser.licenseNum" placeholder="Вод. удостоверение">
+  <button mat-button color="primary" (click)="saveEdit()">Сохранить</button>
+  <button mat-button (click)="cancelEdit()">Отмена</button>
+</mat-card>

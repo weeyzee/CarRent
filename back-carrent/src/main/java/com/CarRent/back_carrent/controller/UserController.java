@@ -6,13 +6,13 @@ import com.CarRent.back_carrent.mapper.UserMapper;
 import com.CarRent.back_carrent.model.User;
 import com.CarRent.back_carrent.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private final UserService userService;
@@ -21,6 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.getAllUsers().stream()
@@ -43,6 +44,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserCreateDto userCreateDto) {
         return userService.updateUser(id, userCreateDto)
                 .map(UserMapper::toDto)
@@ -59,6 +61,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();

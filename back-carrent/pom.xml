@@ -122,6 +122,29 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/classes/static/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>D:/FourthCourse/CarRent/frontend-carrent/dist/frontend-carrent/browser/</directory>
+                                </resource>
+                                <includes>
+                                    <include>**/*</include>
+                                </includes>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 

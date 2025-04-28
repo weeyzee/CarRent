@@ -2,19 +2,16 @@
     <div class="card-header">
       <mat-card-title class="car-title">{{ car.brand }} {{ car.model }}</mat-card-title>
       <div class="action-buttons">
-        <!-- Кнопка редактирования -->
       <button mat-mini-fab class="edit-button" [routerLink]="['/cars', car.carId]" (click)="$event.stopPropagation()">
         <mat-icon>edit</mat-icon>
       </button>
 
-      <!-- Кнопка удаления -->
-      <button mat-mini-fab class="delete-button" (click)="onDelete(); $event.stopPropagation();">
+      <button mat-mini-fab class="delete-button" (click)="delCar(car.carId)">
         <mat-icon>delete</mat-icon>
       </button>
 
-      <!-- Кнопка подробностей с иконкой -->
       <button mat-mini-fab color="accent" (click)="viewDetails(car)">
-        <mat-icon>visibility</mat-icon> <!-- Иконка просмотра -->
+        <mat-icon>visibility</mat-icon> 
       </button>
       </div>
     </div>

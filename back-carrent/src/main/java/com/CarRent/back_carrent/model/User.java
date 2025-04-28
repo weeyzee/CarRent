@@ -24,7 +24,7 @@ public class User {
     private String email;
 
     @Column(unique = true)
-    @NotNull(message = "Phone number cannot be null") // Добавляем валидацию
+    @NotNull(message = "Phone number cannot be null") 
     private String phoneNumber;
 
     @Column(unique = true)
@@ -35,5 +35,6 @@ public class User {
 
     private Timestamp registrationDate = new Timestamp(System.currentTimeMillis());
 
+    private String role;
 
 }
